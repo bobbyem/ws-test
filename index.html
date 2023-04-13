@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OG Websocket</title>
+  </head>
+  <body>
+    <div id="messages"></div>
+    <div>
+      <label for="input">Message</label>
+      <input type="text" name="input" id="input" />
+    </div>
+    <script>
+      //Variables
+      const input = document.querySelector("#input");
+      const messageDisplay = document.querySelector("#messages");
+      const socket = new WebSocket("ws://localhost:5000");
+      let message;
+
+      //Functions
+      function feedBack(text) {
+        const paragraph = document.createElement("p");
+        paragraph.textContent = text;
+        messageDisplay.appendChild(paragraph);
+      }
+
+      function sendMessage() {
+        message = input.value;
+        console.log("Sending message");
+        socket.send(message);
+      }
+
+      //SOCKET - Listeners
+      socket.addEventListener("open", () => feedBack("Connection OPEN"));
+      socket.addEventListener("close", () => feedBack("Connection CLOSED"));
+      socket.addEventListener("message", (e) => feedBack(e.data));
+
+      //ELEMENT - Listeners
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") sendMessage(message);
+      });
+    </script>
+  </body>
+</html>
