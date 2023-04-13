@@ -22,7 +22,7 @@
       //Variables
       const input = document.querySelector("#input");
       const messageDisplay = document.querySelector("#messages");
-      const socket = new WebSocket("ws://");
+      const socket = new WebSocket("ws://" + window.location.host + ":5000");
       let message;
 
       //Functions
