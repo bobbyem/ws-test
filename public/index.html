@@ -22,9 +22,7 @@
       //Variables
       const input = document.querySelector("#input");
       const messageDisplay = document.querySelector("#messages");
-      const socket = new WebSocket(
-        "wss://https://native-ws-test.onrender.com/:5000"
-      );
+      const socket = new WebSocket("wss://native-ws-test.onrender.com/:5000");
       let message;
 
       //Functions
